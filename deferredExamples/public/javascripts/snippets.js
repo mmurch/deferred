@@ -65,6 +65,35 @@ var resp = $.ajax({
 	//ajax options
 });
 
+
+
+resp.success(function(){
+	//success action 1
+});
+
+resp.error(function(){
+	//business logic failure handler
+});
+
+resp.error(function(){
+	//generic failure handler
+});
+
+
+resp.done(function(){
+	//success action 1
+});
+
+resp.fail(function(){
+	//business logic failure handler
+});
+
+resp.fail(function(){
+	//generic failure handler
+});
+
+
+
 var deferred = $.Deferred();
 
 //register success callback(s)
@@ -80,8 +109,11 @@ deferred.then(successCallback, failureCallback);
 deferred.then([successA, successB], [errorA, errorB]);
 
 
+deferred.done(success);
 
+deferred.resolve();
 
+deferred.reject();
 
 
 

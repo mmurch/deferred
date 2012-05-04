@@ -27,7 +27,7 @@ What do the internets say?
 The pattern of assigning a function to be executed upon the completion of another function. 
 
 "Hey, do this and when you're done do this". 
-
+```js
 	function doStuffWithData(data, callback){
 		
 		//do stuff with the data
@@ -40,13 +40,13 @@ The pattern of assigning a function to be executed upon the completion of anothe
 	doStuffWithData({ id: 25, name: 'john'}, function(){
 		alert('We made it!');	
 	});
-
+```
 This is of even more utility when you are expanding it to...
 
 "Hey, do this and if it works, do this other thing if it fails."
 
 ###Ajax
-
+```js
 	$.ajax({
 		data: { id: 25, name: 'john'}, 
 		url: '/person/name',
@@ -63,7 +63,7 @@ This is of even more utility when you are expanding it to...
 			alert('Something went wrong!');	
 		}
 	});
-
+```
 What if you want multiple callbacks for success or error?
 
 ####Pre 1.5
