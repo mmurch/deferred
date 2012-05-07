@@ -66,6 +66,7 @@ This is of even more utility when you are expanding it to...
 "Hey, do this and if it works then do this, but if it fails do this other thing."
 
 ###Ajax
+
 ```js
 	$.ajax({
 		data: { id: 25, name: 'john'}, 
@@ -90,7 +91,7 @@ What if you want multiple callbacks for success or error?
 $.ajax() returned standard XHR object. Not very useful.
 
 ```js
-$.ajax({
+var resp = $.ajax({
 	//ajax options
 });
 ```
@@ -154,8 +155,8 @@ var deferred = $.Deferred(),
 //register success callback(s)
 promise.done(success);
 
-//resolve
-~~promise.done(success);~~
+//this will be ignored
+promise.done(success);
 ```
 
 [stackoverflow]: http://stackoverflow.com/questions/4869609/how-can-jquery-deferred-be-used
