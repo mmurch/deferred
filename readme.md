@@ -8,10 +8,6 @@ What do the internets say?
  
 //not very clear
 
-"One model for understanding Deferred is to think of it as a chain-aware function wrapper." - [jQuery docs][jQuery docs] 
-
-//slightly clearer
-
 "...what they actually mean: the ability to register an interest in the outcome of arbitrary asynchronous behavior, even if the outcome has already occurred. Even better, you can register your interest in the outcome of behavior that may or may not be asynchronous." - [Rebecca Murphey][rmurphey]
 
 //now that's interesting, we'll come back to this

@@ -30,7 +30,7 @@ app.configure('production', function(){
 
 app.get('/', function(req, res){
   res.render('index', {
-    title: 'Express'
+    title: 'jQuery Deferred'
   });
 });
 
@@ -58,6 +58,12 @@ app.get('/api/markers.json', function(req, res){
 
 app.get('/api/markers2.json', function(req, res){
   
+});
+
+app.get('/animation', function(req, res){
+  res.render('animation', {
+    title: 'Animation'
+  });
 });
 
 // Only listen on $ node app.js

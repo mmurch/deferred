@@ -1,25 +1,19 @@
 (function(app, window, undefined){
 
-	$(function(){
-
-		app.fetchGoogleMaps();
-
-	});
-
 	app.fetchGoogleMaps = function(){
 		$.subscribe('mapsLoaded', function(){
-			fetchFirstMarkerSet();
+			app.fetchFirstMarkerSet();
 		});
 
 		$.ajax({
 			type: 'GET',
-			url: 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=maps',
+			url: 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=googleMapsLoaded',
 			dataType: 'script',
 			error: function(jqXHR, textStatus, errorThrown){
 				alert(textStatus);
 			}
 		});
-	}
+	};
 
 	app.fetchFirstMarkerSet = function(){
 		$.ajax({
@@ -52,6 +46,12 @@
 			}	
 		})
 	};
+
+	$(function(){
+
+		app.fetchGoogleMaps();
+
+	});
 
 })(ZD.app('multi'), window)
 

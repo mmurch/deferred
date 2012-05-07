@@ -1,16 +1,9 @@
 (function(app, window, undefined){
+	
 	app.mapsFetched = false;
 	app.firstSetFetched = false;
 	app.secondSetFetched = false;
-
-	$(function(){
-
-		app.fetchGoogleMaps();
-		app.fetchFirstMarkerSet();
-		app.fetchSecondMarkerSet();
-
-	});
-
+	
 	app.fetchGoogleMaps = function(){
 		$.subscribe('mapsLoaded', function(){
 			app.mapsFetched = true;
@@ -62,11 +55,19 @@
 	};
 
 	app.tryMakeGoogleMap = function(){
-		if (!(app.mapsFetched && app.firstSetFetched && app.secondSetFetched)) {
+		if (!(app.mapsFetched && app.firstSetFetched && app.secondSetFetched)){
 			return;
 		}
 
 		app.makeGoogleMap();
 	};
 
-})(ZD.app('multi'), window)
+	$(function(){
+
+		app.fetchGoogleMaps();
+		app.fetchFirstMarkerSet();
+		app.fetchSecondMarkerSet();
+
+	});
+
+})(ZD.app('multi'), window);

@@ -1,6 +1,8 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #121313;
+  color: #fff;
 }
 
 a {
@@ -14,8 +16,28 @@ a {
 
 .nav {
 	text-align: center;
+	width: 600px;
 }
 
 .nav a {
+	padding: 0 12px;
+}
 
+.playground {
+	width: 1000px;
+	height: 800px;
+	border: 1px solid #333;
+	padding: 14px;
+	position: relative;
+}
+
+.playground .square {
+	position: absolute;
+	opacity: 0.75;
+	-moz-opacity: 0.75;
+	filter:alpha(opacity=75);
+}
+
+.playground .circle {
+	position: absolute;
 }

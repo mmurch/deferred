@@ -108,17 +108,38 @@ deferred.fail([errorA, errorB]);
 deferred.then(successCallback, failureCallback);
 deferred.then([successA, successB], [errorA, errorB]);
 
+var deferred = $.Deferred(),
+	promise = deferred.promise();
+
+//register success callback(s)
+promise.done(success);
+promise.done([successA, successB]);
+
+//register failure callback(s)
+promise.fail(error);
+promise.fail([errorA, errorB]);
+
+//register both success and failure callback(s)
+promise.then(successCallback, failureCallback);
+promise.then([successA, successB], [errorA, errorB]);
 
 deferred.done(success);
 
-deferred.resolve();
 
-deferred.reject();
+var deferred = $.Deferred(),
+	promise = deferred.promise();
+
+promise.resolve();
+
+promise.reject();
 
 
+var deferred = $.deferred();
 
-
-
+$.when($.ajax({}), $('.profile').animate(), deferred)
+	.done(function(){ /* success callback */ })
+	.fail(function(){ /* fail callback */ })
+	.always(function(){ /* regardless callback */ });
 
 
 
