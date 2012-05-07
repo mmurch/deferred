@@ -10,7 +10,7 @@
 
 		$.ajax({
 			type: 'GET',
-			url: 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=maps',
+			url: 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=googleMapsLoaded',
 			dataType: 'script',
 			error: function(jqXHR, textStatus, errorThrown){
 				deferred.reject();
@@ -26,6 +26,7 @@
 			url: '/api/markers.json',
 			dataType: 'json',
 			success: function(resp){
+				app.markers = app.markers || [];
 				app.markers[0] = resp;
 			}	
 		});

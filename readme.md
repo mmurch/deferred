@@ -1,8 +1,6 @@
 #jQuery Deferred Objects
 
-##Introduction
-
-What do the internets say?
+##To the interwebs!
 
 "jQuery.Deferred(), introduced in version 1.5, is a chainable utility object that can register multiple callbacks into callback queues, invoke callback queues, and relay the success or failure state of any synchronous or asynchronous function." - [jQuery docs][jQuery docs]
  
@@ -13,6 +11,8 @@ not very clear
 now that's interesting, we'll come back to this
 
 ##Building blocks
+
+Let's quickly review the javascript concepts necessary to understand in order to work with deferred objects.
 
 ###Chaining
 
@@ -67,6 +67,8 @@ This is of even more utility when you are expanding it to...
 
 ###Ajax
 
+Here's a simple request using jQuery's `$.ajax()`.
+
 ```js
 	$.ajax({
 		data: { id: 25, name: 'john'}, 
@@ -97,7 +99,7 @@ var resp = $.ajax({
 ```
 
 ####1.5 and beyond
-$.ajax() returns deferred object. Opens up a lot of possibilities.
+$.ajax() returns a jqXHR object. This is a wrapper of the standard XHR object that implements the deferred interface. This opens up a lot of possibilities.
 
 ```js
 var resp = $.ajax({
@@ -161,7 +163,7 @@ promise.done(success);
 
 ###Wrapping deferreds with $.when()
 
-`$.when()` takes multiple deferred objects and wraps them in a new one to which you can attach callbacks. 
+`$.when()` takes multiple deferred objects and wraps them in a new one to which you can attach callbacks.
 
 ```js
 $.when($.ajax({}), $('.profile').animate(), deferred)
@@ -169,6 +171,17 @@ $.when($.ajax({}), $('.profile').animate(), deferred)
 	.fail(function(){ /* fail callback */ })
 	.always(function(){ /* regardless callback */ });
 ```
+When _all_ of the deferred objects passed in have been resolved, the success callback(s) passed into `done()` are fired. 
+
+When _any_ of the deferred objects passed in has been rejected, the fail callback(s) passed into `fail()` are fired.
+
+In any case, the callback(s) passed into `always()` are fired.
+
+###jQuery deferred's `pipe()`
+
+More coming soon...
+
+
 
 [stackoverflow]: http://stackoverflow.com/questions/4869609/how-can-jquery-deferred-be-used
 [jQuery docs]: http://api.jquery.com/category/deferred-object/

@@ -53,11 +53,15 @@ app.get('/ajax-multi-best', function(req, res){
 });
 
 app.get('/api/markers.json', function(req, res){
-
+	setTimeout(function(){
+		res.sendfile('/api/markers.json');
+	}, 1000);
 });
 
 app.get('/api/markers2.json', function(req, res){
-  
+	setTimeout(function(){
+		res.sendfile('/api/markers2.json');
+	}, 2000);
 });
 
 app.get('/animation', function(req, res){
