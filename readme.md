@@ -159,6 +159,17 @@ promise.done(success);
 promise.done(success);
 ```
 
+###Wrapping deferreds with $.when()
+
+`$.when()` takes multiple deferred objects and wraps them in a new one to which you can attach callbacks. 
+
+```js
+$.when($.ajax({}), $('.profile').animate(), deferred)
+	.done(function(){ /* success callback */ })
+	.fail(function(){ /* fail callback */ })
+	.always(function(){ /* regardless callback */ });
+```
+
 [stackoverflow]: http://stackoverflow.com/questions/4869609/how-can-jquery-deferred-be-used
 [jQuery docs]: http://api.jquery.com/category/deferred-object/
 [rmurphey]: http://rmurphey.com/blog/2010/12/25/deferreds-coming-to-jquery/
