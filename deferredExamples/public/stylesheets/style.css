@@ -17,6 +17,7 @@ a {
 .nav {
 	text-align: center;
 	width: 600px;
+	margin-top: 4px;
 }
 
 .nav a {
