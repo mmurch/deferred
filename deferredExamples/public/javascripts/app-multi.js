@@ -21,14 +21,15 @@
 			    		app.markers[0][i].long
 		    		);
 			    }
-
-			    for (i = 0, max = app.markers[1].length; i < max; i++) {
-					app.makeMarker(
-			    		'00bb41', 
-			    		app.markers[1][i].lat, 
-			    		app.markers[1][i].long
-		    		);
-			    }
+		    	if (app.markers[1]){
+				    for (i = 0, max = app.markers[1].length; i < max; i++) {
+						app.makeMarker(
+				    		'00bb41', 
+				    		app.markers[1][i].lat, 
+				    		app.markers[1][i].long
+			    		);
+				    }
+				}
 			});
 	};
 

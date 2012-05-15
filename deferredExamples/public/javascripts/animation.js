@@ -12,7 +12,7 @@
 		setTimeout(function(){
 		
 			//do a thing!
-			
+			app.batchLeftRight(squares);
 		}, 1000);
 	});
 
