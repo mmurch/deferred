@@ -144,6 +144,43 @@ $.when($.ajax({}), $('.profile').animate(), deferred)
 
 
 
+app.fetchFirstMarkerSet()
+	.pipe(app.processMarkers)
+	.done(app.alertSuccess)
+	.fail(app.alertFailure);
+
+
+
+
+app.fetchFirstMarkerSet()
+	.done(function(data){
+		app.processMarkers(data)
+			.done(app.alertSuccess)
+			.fail(app.alertFailure);
+	})
+	.fail(app.alertFailure);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

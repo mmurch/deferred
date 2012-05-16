@@ -88,6 +88,12 @@ app.get('/animation', function(req, res){
   });
 });
 
+app.get('/scratch', function(req, res){
+	res.render('scratch', {
+		title: 'scratch'
+	});
+});
+
 // Only listen on $ node app.js
 
 if (!module.parent) {
