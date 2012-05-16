@@ -162,6 +162,20 @@ app.fetchFirstMarkerSet()
 
 
 
+app.fetchFirstMarkerSet()
+			.pipe($.Deferred().reject())
+			.done(app.alertSuccess)
+			.fail(app.alertFailure);
+
+
+
+app.fetchFirstMarkerSet()
+			.pipe(function(){
+				return $.Deferred().reject();
+			})
+			.done(app.alertSuccess)
+			.fail(app.alertFailure);
+
 
 
 

@@ -52,25 +52,19 @@
 	};
 
 	$(function(){
-		// using pipe() to chain
+
 		// app.fetchFirstMarkerSet()
 		// 	.pipe(app.processMarkers)
 		// 	.done(app.alertSuccess)
 		// 	.fail(app.alertFailure);
 
-		app.fetchFirstMarkerSet()
-			.pipe(app.processMarkers)
-			.done(app.alertSuccess)
-			.fail(app.alertFailure);
-
-		app.fetchFirstMarkerSet()
-			.done(function(data){
-				app.processMarkers(data)
-					.done(app.alertSuccess)
-					.fail(app.alertFailure);
-			})
-			.fail(app.alertFailure);
-			
+		// app.fetchFirstMarkerSet()
+		// 	.done(function(data){
+		// 		app.processMarkers(data)
+		// 			.done(app.alertSuccess)
+		// 			.fail(app.alertFailure);
+		// 	})
+		// 	.fail(app.alertFailure);		
 			
 	});
 

@@ -177,10 +177,50 @@ When _any_ of the deferred objects passed in has been rejected, the fail callbac
 
 In any case, the callback(s) passed into `always()` are fired.
 
-###jQuery deferred's `pipe()`
+###Chaining deferreds with `pipe()`
 
-More coming soon...
+`pipe()` is one of the more difficult parts of the jQuery's deferred implementation to understand. It can help you reduce the nesting of your deferred chains by allowing you to use data from your last deferred in your next one without assigning a callback. 
 
+Typically added onto a chain of deferred function calls, `pipe()` executes the function you pass into it with the results of the previous deferred function in the chain as parameters. `pipe()` breaks the chain of deferreds leading up to it and instead returns (and allows you to chain on) the deferred promise returned by the function you pass into it. WHOA.
+
+```js
+
+app.fetchFirstMarkerSet()
+	.pipe(app.processMarkers)
+	.done(app.alertSuccess)
+	.fail(app.alertFailure);
+
+//is more or less equivalent to (and much prettier than)...
+
+app.fetchFirstMarkerSet()
+	.done(function(data){
+		app.processMarkers(data)
+			.done(app.alertSuccess)
+			.fail(app.alertFailure);
+	})
+	.fail(app.alertFailure);
+```
+
+As always, passing a function that doesn't return a deferred promise will be treated as a resolved promise. __Do not__ treat `pipe()` like `when()` and pass it a promise instead of a function, because it will be treated as a resolved promise regardless of its state. 
+
+```js
+app.fetchFirstMarkerSet()
+			.pipe($.Deferred().reject())
+			.done(app.alertSuccess)
+			.fail(app.alertFailure);
+
+//app.alertSuccess will be executed
+
+app.fetchFirstMarkerSet()
+			.pipe(function(){
+				return $.Deferred().reject();
+			})
+			.done(app.alertSuccess)
+			.fail(app.alertFailure);
+
+//app.alertFailure will be executed
+
+```
 
 
 [stackoverflow]: http://stackoverflow.com/questions/4869609/how-can-jquery-deferred-be-used
