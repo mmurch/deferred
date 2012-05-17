@@ -4,11 +4,11 @@
 
 "jQuery.Deferred(), introduced in version 1.5, is a chainable utility object that can register multiple callbacks into callback queues, invoke callback queues, and relay the success or failure state of any synchronous or asynchronous function." - [jQuery docs][jQuery docs]
  
-not very clear
+Not very helpful. Why do I want to find out more?
 
 "...what they actually mean: the ability to register an interest in the outcome of arbitrary asynchronous behavior, even if the outcome has already occurred. Even better, you can register your interest in the outcome of behavior that may or may not be asynchronous." - [Rebecca Murphey][rmurphey]
 
-now that's interesting, we'll come back to this
+Now _that's_ interesting, we'll come back to this...
 
 ##Building blocks
 
@@ -221,7 +221,9 @@ app.fetchFirstMarkerSet()
 //app.alertFailure will be executed
 
 ```
+##`always()`
 
+In the end we have a very helpful set of new tools in jQuery's deferred implementation. The key improvement it provides us is the ability to allow the javascript at our highest levels of abstraction to remain abstract and unmuddled by the implementation details of the code at lower levels of abstraction, even when that lower-level code is asynchronous.
 
 [stackoverflow]: http://stackoverflow.com/questions/4869609/how-can-jquery-deferred-be-used
 [jQuery docs]: http://api.jquery.com/category/deferred-object/
