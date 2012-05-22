@@ -8,26 +8,39 @@
 
 	app.nextY = 14;
 
-	app.addNewSquare = function(opts){
-		var defaults = {
-			size: 150,
-			picker: new app.ColorPicker() 
-		},
-		config = $.extend({}, defaults, opts);
+	app.Square = function(opts){
+		var self = this,
+			defaults = {
+				size: 150
+			};
 
-		var square = $('<div class="square"></div>').css({
-			'background-color': config.picker.next(),
-			'height': config.size,
-			'width': config.size,
-			'left': (app.playgroundWidth / 2) - (config.size / 2),
+		self.config = $.extend({}, defaults, opts);
+
+		self.$el = $('<div class="square"></div>').css({
+			'background-color': app.picker.next(),
+			'height': self.config.size,
+			'width': self.config.size,
+			'left': (app.playgroundWidth / 2) - (self.config.size / 2),
 			'top': app.nextY
 		});
 
-		app.nextY = app.nextY + config.size + 14;
+		self.goLeft = function(){	
+			return self.$el.animate({
+				left: app.playgroundPadding
+			}, self.$el.width() * 5).promise();
+		};
 
-		app.playground.append(square);
+		self.goRight = function(){
+			return self.$el.animate({
+				left: app.playgroundWidth - self.$el.width() 
+						+ app.playgroundPadding
+			}, self.$el.width() * 5).promise();
+		};
 
-		return square;
+		app.nextY = app.nextY + self.config.size + 14;
+		app.playground.append(self.$el);
+
+		return self;
 	};
 
 	app.ColorPicker = function(){
@@ -45,5 +58,7 @@
 	};
 
 	app.colors = ['#fe812e', '#00bb41', '#d8362e', '#734889'];
+
+	app.picker = new app.ColorPicker();
 
 })(ZD.app('animation'), window);

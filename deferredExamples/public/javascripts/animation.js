@@ -1,56 +1,37 @@
-(function(app, window, undefined){
+(function(app, window){
 
 	$(function(){
 
-		var picker = new app.ColorPicker(),
-			squares = [];
+		var squares = [];
 
-		squares.push(app.addNewSquare({ picker: picker }));
-		squares.push(app.addNewSquare({ picker: picker, size: 90 }));
-		squares.push(app.addNewSquare({ picker: picker, size: 220 }));
+		squares.push(new app.Square());
+		squares.push(new app.Square({ size: 90 }));
+		squares.push(new app.Square({ size: 60 }));
+		squares.push(new app.Square({ size: 300 }));
 
 		setTimeout(function(){
-		
 			//do a thing!
-			app.batchLeftRight(squares);
+			// app.eachLeftRight(squares);
+			// app.batchLeftRight(squares);
 		}, 1000);
 	});
 
 	app.eachLeftRight = function(squares){
 		$(squares).each(function(){
-			app.sendSquareLeftThenRight(this);
+			this.goLeft().done(this.goRight);
 		});
 	};
 
 	app.batchLeftRight = function(squares){
 		var arrayOfDeferreds = $.map(squares, function(s){
-			return app.sendSquareLeft(s);
+			return s.goLeft();
 		});
 
 		$.when.apply(null, arrayOfDeferreds)
 			.done(function(){
 				$.each(squares, function(){
-					app.sendSquareRight(this);
+					this.goRight();
 				});
-			});
-	}
-
-	app.sendSquareLeft = function($square){	
-		return $square.animate({
-			left: app.playgroundPadding
-		}, $square.width() * 5).promise();
-	};
-
-	app.sendSquareRight = function($square){
-		return $square.animate({
-			left: app.playgroundWidth - $square.width() + app.playgroundPadding
-		}, $square.width() * 5).promise();
-	};
-
-	app.sendSquareLeftThenRight = function($square){
-		app.sendSquareLeft($square)
-			.done(function(){
-				app.sendSquareRight($square);
 			});
 	};
 

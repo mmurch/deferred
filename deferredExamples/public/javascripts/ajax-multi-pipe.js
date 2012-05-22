@@ -1,30 +1,10 @@
 (function(app, window, undefined){
-	
-	app.fetchGoogleMaps = function(){
 
-		var deferred = $.Deferred();
-
-		$.subscribe('mapsLoaded', function(){
-			deferred.resolve();
-		});
-
-		$.ajax({
-			type: 'GET',
-			url: 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=googleMapsLoaded',
-			dataType: 'script',
-			error: function(jqXHR, textStatus, errorThrown){
-				deferred.reject();
-			}
-		});
-
-		return deferred.promise();
-	}
-
-	app.fetchFirstMarkerSet = function(){
+	app.fetchMarkersToProcess = function(callback){
 		return $.ajax({
 			type: 'GET',
 			url: '/api/markers.json',
-			dataType: 'json'	
+			dataType: 'json'
 		});
 	};
 
@@ -42,7 +22,7 @@
 
 	$(function(){
 		$.when(app.fetchGoogleMaps(), 
-				app.fetchFirstMarkerSet()
+				app.fetchMarkersToProcess()
 					.pipe(app.processMarkers))
 			.done(app.makeGoogleMap);
 	});

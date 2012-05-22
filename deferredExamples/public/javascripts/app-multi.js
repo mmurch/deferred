@@ -1,4 +1,62 @@
 (function(app, window, undefined){
+
+	app.fetchGoogleMaps = function(callback){
+		var deferred = $.Deferred();
+
+		$.subscribe('mapsLoaded', function(){
+			if (callback){
+				callback();
+			}
+			deferred.resolve();
+		});
+
+		$.ajax({
+			type: 'GET',
+			url: 'http://maps.googleapis.com/maps/api/js' + 
+				'?sensor=false&callback=googleMapsLoaded',
+			dataType: 'script',
+			error: function(jqXHR, textStatus, errorThrown){
+				deferred.reject();
+			}
+		});
+
+		return deferred.promise();
+	};
+
+	app.fetchMarkers1 = function(callback){
+		return $.ajax({
+			type: 'GET',
+			url: '/api/markers.json',
+			dataType: 'json',
+			success: function(resp){
+				app.markers = app.markers || [];
+				app.markers[0] = resp;
+
+				if (callback){					
+					callback();
+				}
+			}	
+		});
+	};
+
+	app.fetchMarkers2 = function(callback){
+		return $.ajax({
+			type: 'GET',
+			url: '/api/markers2.json',
+			dataType: 'json',
+			success: function(resp){
+				app.markers = app.markers || [];
+				app.markers[1] = resp;
+
+				if (callback){
+					callback();
+				}
+			}	
+		});
+	};
+
+
+	//helper functions - pay no attention to the man behind the curtain
 	app.makeGoogleMap = function(){
 
 		$.get('/javascripts/StyledMarker.js')
@@ -40,6 +98,7 @@
 			map: app.googleMap
 		});
 	};
+
 })(ZD.app('multi'), window);
 
 function googleMapsLoaded(){
