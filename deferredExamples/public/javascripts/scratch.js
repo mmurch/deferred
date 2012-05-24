@@ -58,6 +58,11 @@
 		// 	.done(app.alertSuccess)
 		// 	.fail(app.alertFailure);
 
+		// app.getRejected()
+		// 	.pipe(app.processMarkers)
+		// 	.done(app.alertSuccess)
+		// 	.fail(app.alertFailure);
+
 		// app.fetchFirstMarkerSet()
 		// 	.done(function(data){
 		// 		app.processMarkers(data)

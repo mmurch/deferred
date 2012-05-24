@@ -225,7 +225,20 @@ app.fetchFirstMarkerSet()
 
 In the end we have a very helpful set of new tools in jQuery's deferred implementation. The key improvement it provides us is the ability to allow the javascript at our highest levels of abstraction to remain abstract and unmuddled by the implementation details of the code at lower levels of abstraction, even when that lower-level code is asynchronous.
 
+##useful links
+
+[http://stackoverflow.com/questions/4869609/how-can-jquery-deferred-be-used](http://stackoverflow.com/questions/4869609/how-can-jquery-deferred-be-used)
+
+[http://api.jquery.com/category/deferred-object/](http://api.jquery.com/category/deferred-object/)
+
+[http://rmurphey.com/blog/2010/12/25/deferreds-coming-to-jquery/](http://rmurphey.com/blog/2010/12/25/deferreds-coming-to-jquery/)
+
+[http://colonelpanic.net/2011/11/jquery-deferred-objects/](http://colonelpanic.net/2011/11/jquery-deferred-objects/)
+
+[http://msdn.microsoft.com/en-us/magazine/gg723713.aspx](http://msdn.microsoft.com/en-us/magazine/gg723713.aspx)
+
+[http://stackoverflow.com/a/10253290/236974](http://stackoverflow.com/a/10253290/236974)
+
 [stackoverflow]: http://stackoverflow.com/questions/4869609/how-can-jquery-deferred-be-used
 [jQuery docs]: http://api.jquery.com/category/deferred-object/
 [rmurphey]: http://rmurphey.com/blog/2010/12/25/deferreds-coming-to-jquery/
-[annotatedfiddle]: http://jsfiddle.net/Raynos/Hufjr/

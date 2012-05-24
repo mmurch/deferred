@@ -1,4 +1,142 @@
 
+var deferred = $.Deferred();
+
+deferred.resolve();
+
+deferred.resolveWith(context[, args]);
+
+deferred.reject();
+
+deferred.rejectWith(context[, args]);
+
+var chainableObj = {
+
+	doAThing: function(){
+
+		//do the thing
+
+		return this;
+	},
+
+	doAnotherThing: function(){
+
+		//do the other thing
+
+		return this;
+	}
+
+};
+
+chainableObj
+	.doAThing()
+	.doAnotherThing();
+
+app.fetchGoogleMaps = function(callback){
+
+	$.subscribe('mapsLoaded', function(){
+		if (callback){
+			callback();
+		}
+	});
+
+	$.ajax({
+		type: 'GET',
+		url: 'http://maps.googleapis.com/maps/api/js' + 
+			'?sensor=false&callback=googleMapsLoaded',
+		dataType: 'script'
+	});
+};
+
+app.fetchMarkers1 = function(callback){
+	$.ajax({
+		type: 'GET',
+		url: '/api/markers.json',
+		dataType: 'json',
+		success: function(resp){
+			app.markers = app.markers || [];
+			app.markers[0] = resp;
+
+			if (callback){					
+				callback();
+			}
+		}	
+	});
+};
+
+app.fetchMarkers2 = function(callback){
+	$.ajax({
+		type: 'GET',
+		url: '/api/markers2.json',
+		dataType: 'json',
+		success: function(resp){
+			app.markers = app.markers || [];
+			app.markers[1] = resp;
+
+			if (callback){
+				callback();
+			}
+		}	
+	});
+};
+
+
+app.fetchGoogleMaps = function(callback){
+	var deferred = $.Deferred();
+
+	$.subscribe('mapsLoaded', function(){
+		if (callback){
+			callback();
+		}
+		deferred.resolve();
+	});
+
+	$.ajax({
+		type: 'GET',
+		url: 'http://maps.googleapis.com/maps/api/js' + 
+			'?sensor=false&callback=googleMapsLoaded',
+		dataType: 'script',
+		error: function(jqXHR, textStatus, errorThrown){
+			deferred.reject();
+		}
+	});
+
+	return deferred.promise();
+};
+
+app.fetchMarkers1 = function(callback){
+	return $.ajax({
+		type: 'GET',
+		url: '/api/markers.json',
+		dataType: 'json',
+		success: function(resp){
+			app.markers = app.markers || [];
+			app.markers[0] = resp;
+
+			if (callback){					
+				callback();
+			}
+		}	
+	});
+};
+
+app.fetchMarkers2 = function(callback){
+	return $.ajax({
+		type: 'GET',
+		url: '/api/markers2.json',
+		dataType: 'json',
+		success: function(resp){
+			app.markers = app.markers || [];
+			app.markers[1] = resp;
+
+			if (callback){
+				callback();
+			}
+		}	
+	});
+};
+
+
+
 
 
 function doStuffWithData(data, callback){
@@ -53,7 +191,7 @@ var chainableObj = {
 
 };
 
-chainableObject
+chainableObj
 	.doAThing()
 	.doAnotherThing();
 
@@ -108,6 +246,12 @@ deferred.fail([errorA, errorB]);
 deferred.then(successCallback, failureCallback);
 deferred.then([successA, successB], [errorA, errorB]);
 
+//register callbacks that get executed
+//on success OR failure
+deferred.always(alwaysCallback);
+deferred.always([alwaysCallbackA, alwaysCallbackB]);
+
+
 var deferred = $.Deferred(),
 	promise = deferred.promise();
 
@@ -122,6 +266,8 @@ promise.fail([errorA, errorB]);
 //register both success and failure callback(s)
 promise.then(successCallback, failureCallback);
 promise.then([successA, successB], [errorA, errorB]);
+
+
 
 deferred.done(success);
 

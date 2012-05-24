@@ -8,11 +8,11 @@
 		});
 	};
 
-	app.processMarkers = function(data){
+	app.processMarkers = function(markers){
 		return $.ajax({
 			url: '/api/manifestDestiny',
 			type: 'POST',
-			data: { data: data }
+			data: { data: markers }
 		})
 		.done(function(resp){
 			app.markers = app.markers || [];
